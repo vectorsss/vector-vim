@@ -108,29 +108,8 @@ map Q :q<CR>
 map S :w<CR>
 map R :source $MYVIMRC<CR>
 
-" split operation
-map sj :set splitbelow<CR>:split<CR>
-map sk :set nosplitbelow<CR>:split<CR>
-map sl :set splitright<CR>:vsplit<CR>
-map sh :set nosplitright<CR>:vsplit<CR>
-
-" move the cursor
-map <LEADER>w <C-w>k
-map <LEADER>s <C-w>j
-map <LEADER>a <C-w>h
-map <LEADER>d <C-w>l
 " Open the vimrc file anytime
 map <LEADER>vc :e ~/.vim/vimrc<CR>
-" resize the editor
-"map <up> :res+5<CR>
-"map <down> :res-5<CR>
-"map <left> :vertical resize-5<CR>
-"map <right> :vertical resize+5<CR>
-
-" move tab operation, new/move
-map te :tabe<cR>
-map tn :tabn<CR> 
-map tp :tabp<CR>
 
 " speedup moving
 noremap J 5j
@@ -138,18 +117,133 @@ noremap K 5k
 noremap L 5l
 noremap H 5h
 
-" no highlight search result
-noremap <ESC><CR> :nohlsearch<CR>
 " make cursor in the center of screen when we choose the searching result
 noremap n nzz
 noremap N Nzz
 
+" no highlight search result
+noremap <ESC><CR> :nohlsearch<CR>
+
 " disable the default s key
 noremap s <nop>
 
-"
-"coc-vim setting begin
-"
+" ===
+" === Window Management
+" ===
+
+" split operation
+map sj :set splitbelow<CR>:split<CR>
+map sk :set nosplitbelow<CR>:split<CR>
+map sl :set splitright<CR>:vsplit<CR>
+map sh :set nosplitright<CR>:vsplit<CR>
+
+" move the cursor
+map <LEADER>k <C-w>k
+map <LEADER>j <C-w>j
+map <LEADER>h <C-w>h
+map <LEADER>l <C-w>l
+map <LEADER>w <C-w>w
+
+
+" Place the two screens vertically
+noremap <LEADER>K <C-w>t<C-w>K
+" Place the two screens horizontally
+noremap <LEADER>H <C-w>t<C-w>H
+
+
+" resize the editor
+"map <up> :res+5<CR>
+"map <down> :res-5<CR>
+"map <left> :vertical resize-5<CR>
+"map <right> :vertical resize+5<CR>
+
+
+" ===
+" === Tab management
+" ===
+
+" move tab operation, new/move/close
+map te :tabe<cR>
+map tn :tabn<CR>
+map tp :tabp<CR>
+map tc :tabc<CR>
+
+
+
+" ===
+" === Other useful stuff
+" ===
+
+" Press space twice to jump to the next '<++>' and edit it
+map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
+
+" Spelling Check with <space>sc
+map <LEADER>sc :set spell!<CR>
+noremap <C-x> ea<C-x>s
+inoremap <C-x> <Esc>ea<C-x>s
+
+" Call figlet
+map tx :r !figlet 
+
+" Compile function
+map r :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+  exec "w"
+  if &filetype == 'c'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'cpp'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %<"
+  elseif &filetype == 'sh'
+    :!time bash %
+  elseif &filetype == 'python'
+    silent! exec "!clear"
+    exec "!time python3 %"
+  elseif &filetype == 'html'
+    exec "!firefox % &"
+  elseif &filetype == 'markdown'
+    exec "MarkdownPreview"
+  elseif &filetype == 'vimwiki'
+    exec "MarkdownPreview"
+  endif
+endfunc
+
+map R :call CompileBuildrrr()<CR>
+func! CompileBuildrrr()
+  exec "w"
+  if &filetype == 'vim'
+    exec "source $MYVIMRC"
+  elseif &filetype == 'markdown'
+    exec "echo"
+  endif
+endfunc
+
+" ===
+" === Plugins
+" ===
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'honza/vim-snippets'
+Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
+Plug 'SirVer/ultisnips'
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'vimwiki/vimwiki'
+call plug#end()
+
+
+" ===
+" === coc-nvim
+" ===
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -279,20 +373,53 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-"
-"coc-vim setting end 
-"
-
 
 " ===
-" === Plugins
+" === MarkdownPreview
 " ===
-call plug#begin('~/.vim/plugged')
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_command_for_global = 0
+let g:mkdp_open_to_the_world = 0
+let g:mkdp_open_ip = ''
+let g:mkdp_browser = 'safari'
+let g:mkdp_echo_preview_url = 0
+let g:mkdp_browserfunc = ''
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1
+    \ }
+let g:mkdp_markdown_css = ''
+let g:mkdp_highlight_css = ''
+let g:mkdp_port = ''
+let g:mkdp_page_title = '「${name}」'
 
-Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'honza/vim-snippets'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'SirVer/ultisnips'
+" ===
+" === vimwiki
+" ===
+let g:vimwiki_list = [{
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path_html': '~/wiki_html',
+  \ 'path': '~/wiki',
+  \ 'template_path': '~/.vim/vimwiki/template/',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+  \ 'template_default':'markdown',
+  \ 'custom_wiki2html': '~/.vim/vimwiki/wiki2html.sh',
+  \ 'template_ext':'.html'
+\}]
 
-call plug#end()
+autocmd BufRead,BufNewFile *.md set filetype=vimwiki
+
+let g:taskwiki_sort_orders={"C": "pri-"}
+let g:taskwiki_syntax = 'markdown'
+let g:taskwiki_markdown_syntax='markdown'
+let g:taskwiki_markup_syntax='markdown'
+source ~/.vim/markdown-snippets.vim
+
