@@ -186,7 +186,7 @@ inoremap <C-x> <Esc>ea<C-x>s
 map tx :r !figlet 
 
 " Compile function
-map r :call CompileRunGcc()<CR>
+map <LEADER>b :call CompileRunGcc()<CR>
 func! CompileRunGcc()
   exec "w"
   if &filetype == 'c'
@@ -212,15 +212,16 @@ func! CompileRunGcc()
   endif
 endfunc
 
-map R :call CompileBuildrrr()<CR>
-func! CompileBuildrrr()
-  exec "w"
-  if &filetype == 'vim'
-    exec "source $MYVIMRC"
-  elseif &filetype == 'markdown'
-    exec "echo"
-  endif
-endfunc
+"map R :call CompileBuildrrr()<CR>
+"func! CompileBuildrrr()
+  "exec "w"
+  "if &filetype == 'vim'
+    "exec "source $MYVIMRC"
+  "elseif &filetype == 'markdown'
+    "exec "echo"
+  "endif
+"endfunc
+
 
 " ===
 " === Plugins
@@ -234,7 +235,7 @@ Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
 Plug 'SirVer/ultisnips'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'vimwiki/vimwiki'
 call plug#end()
@@ -383,7 +384,7 @@ let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
 let g:mkdp_open_ip = ''
-let g:mkdp_browser = 'safari'
+let g:mkdp_browser = ''
 let g:mkdp_echo_preview_url = 0
 let g:mkdp_browserfunc = ''
 let g:mkdp_preview_options = {
