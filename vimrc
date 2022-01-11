@@ -306,3 +306,9 @@ source ~/.vim/markdown-snippets.vim
 " === vim-table-mode
 " ===
 map <LEADER>tm :TableModeToggle<CR>
+
+" ===
+" === coc-nvim
+" ===
+
+let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-snippets']
