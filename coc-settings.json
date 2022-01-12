@@ -1,8 +1,12 @@
 {
-  "languageserver": {
-    "golang": {
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "suggest.noselect": true,
+  "suggest.enablePreselect": false,
+    "languageserver": {
+    "go": {
       "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
       "filetypes": ["go"]
     }
   }

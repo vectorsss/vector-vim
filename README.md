@@ -2,3 +2,4 @@
 
 - [ ] vim-table-model
 - [ ] coc-nvim
+- [ ] auto-pairs
