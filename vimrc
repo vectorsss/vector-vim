@@ -247,8 +247,6 @@ Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
 Plug 'ajmwagar/vim-deus'
 " Other visual enhancement
 Plug 'luochen1990/rainbow'
-" Status line
-Plug 'theniceboy/eleline.vim'
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
