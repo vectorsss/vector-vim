@@ -186,9 +186,16 @@ map tc :tabc<CR>
 " map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
 
 " Spelling Check with <space>sc
-map <LEADER>sc :set spell!<CR>
-noremap <C-x> ea<C-x>s
-inoremap <C-x> <Esc>ea<C-x>s
+map <LEADER>sc :call SetSpell()<CR>
+function SetSpell()
+  set spell!
+  noremap <C-x> ea<C-x>s
+  inoremap <C-x> <Esc>ea<C-x>s
+  hi SpellBad cterm=underline ctermfg=red
+  noremap <LEADER>p [s
+  noremap <LEADER>n ]s
+endfunction
+
 
 " Copy to system clipboard(register *)
 vnoremap Y "*y
@@ -297,6 +304,7 @@ let g:mkdp_page_title = '「${name}」'
 
 
 source ~/.vim/markdown-snippets.vim
+autocmd BufRead,BufNewFile *.md call SetSpell()
 
 
 " ===
