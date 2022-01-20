@@ -221,15 +221,6 @@ func! CompileRunGcc()
   endif
 endfunc
 
-"map R :call CompileBuildrrr()<CR>
-"func! CompileBuildrrr()
-  "exec "w"
-  "if &filetype == 'vim'
-    "exec "source $MYVIMRC"
-  "elseif &filetype == 'markdown'
-    "exec "echo"
-  "endif
-"endfunc
 
 
 " ===
@@ -257,7 +248,6 @@ Plug 'cohama/agit.vim'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-Plug 'vimwiki/vimwiki'
 
 
 " Editor Enhancement
