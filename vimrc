@@ -239,7 +239,8 @@ Plug 'luochen1990/rainbow'
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " snippets
 Plug 'honza/vim-snippets'
 " Git
