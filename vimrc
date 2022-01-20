@@ -194,7 +194,7 @@ inoremap <C-x> <Esc>ea<C-x>s
 vnoremap Y "*y
 
 " Call figlet
-map tx :r !figlet 
+map tx :r !figlet
 
 " Compile function
 map <LEADER>b :call CompileRunGcc()<CR>
@@ -217,8 +217,6 @@ func! CompileRunGcc()
   elseif &filetype == 'html'
     exec "!firefox % &"
   elseif &filetype == 'markdown'
-    exec "MarkdownPreview"
-  elseif &filetype == 'vimwiki'
     exec "MarkdownPreview"
   endif
 endfunc
@@ -268,11 +266,17 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'RRethy/vim-illuminate'
 call plug#end()
 
-color deus
 " ===
-" === eleline.vim
+" === 'ajmwagar/vim-deus
 " ===
-let g:airline_powerline_fonts = 0
+colors deus
+set t_Co=256
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set background=dark    " Setting dark mode
+colorscheme deus
+let g:deus_termcolors=256
 " ===
 " === MarkdownPreview
 " ===
@@ -299,27 +303,7 @@ let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
 let g:mkdp_page_title = '「${name}」'
 
-" ===
-" === vimwiki
-" ===
-let g:vimwiki_list = [{
-  \ 'automatic_nested_syntaxes':1,
-  \ 'path_html': '~/wiki_html',
-  \ 'path': '~/wiki',
-  \ 'template_path': '~/.vim/vimwiki/template/',
-  \ 'syntax': 'markdown',
-  \ 'ext':'.md',
-  \ 'template_default':'markdown',
-  \ 'custom_wiki2html': '~/.vim/vimwiki/wiki2html.sh',
-  \ 'template_ext':'.html'
-\}]
 
-autocmd BufRead,BufNewFile *.md set filetype=vimwiki
-
-let g:taskwiki_sort_orders={"C": "pri-"}
-let g:taskwiki_syntax = 'markdown'
-let g:taskwiki_markdown_syntax='markdown'
-let g:taskwiki_markup_syntax='markdown'
 source ~/.vim/markdown-snippets.vim
 
 
