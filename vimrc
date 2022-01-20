@@ -252,12 +252,13 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
+Plug 'matze/vim-move'
 " General highlight
 Plug 'RRethy/vim-illuminate'
 call plug#end()
 
 " ===
-" === 'ajmwagar/vim-deus
+" === ajmwagar/vim-deus
 " ===
 colors deus
 set t_Co=256
@@ -426,3 +427,7 @@ nnoremap <LEADER>gn :GitGutterNextHunk<CR>
 " === rainbow
 " ===
 let g:rainbow_active = 1
+" " ===
+" " === matze/vim-move
+" " ===
+let g:move_key_modifier = 'C'
