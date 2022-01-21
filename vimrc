@@ -171,7 +171,7 @@ noremap <LEADER>H <C-w>t<C-w>H
 " ===
 
 " move tab operation, new/move/close
-map te :tabe<cR>
+map te :tabe<CR>
 map tn :tabn<CR>
 map tp :tabp<CR>
 map tc :tabc<CR>
@@ -262,6 +262,7 @@ Plug 'dkarter/bullets.vim'
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
+Plug 'godlygeek/tabular'
 " General highlight
 Plug 'RRethy/vim-illuminate'
 call plug#end()
@@ -434,6 +435,6 @@ let g:move_key_modifier = 'C'
 " ===
 "let g:vmt_auto_update_on_save = 0
 "let g:vmt_dont_insert_fence = 1
-let g:vmt_cycle_list_item_markers = 1
+let g:vmt_cycle_list_item_markers = 0
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
