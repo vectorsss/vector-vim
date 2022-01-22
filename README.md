@@ -1,30 +1,47 @@
 <h1 align="center"> Vector's VIMRC memo </h1>
 
+## Table of contexts
 
 <!-- TOC GFM -->
 
 * [Pre-requirements](#pre-requirements)
 * [spell check usage](#spell-check-usage)
-* [vim-instant-markdown](#vim-instant-markdown)
-* [tabular](#tabular)
-* [vim-table-model](#vim-table-model)
-* [vim-surround](#vim-surround)
-* [vim-visual-multi](#vim-visual-multi)
-* [coc-translator](#coc-translator)
-* [other visual enhancement](#other-visual-enhancement)
-* [bullets.vim](#bulletsvim)
-* [vim-xtabline](#vim-xtabline)
-* [vim-move](#vim-move)
-* [coc-snippets T.B.A](#coc-snippets-tba)
-* [some known issues](#some-known-issues)
+* [Plugins](#plugins)
+  * [Markdown & Editor enhancement](#markdown--editor-enhancement)
+    * [vim-instant-markdown](#vim-instant-markdown)
+    * [vim-markdown-toc](#vim-markdown-toc)
+    * [vim-table-model](#vim-table-model)
+    * [vim-surround](#vim-surround)
+    * [vim-visual-multi](#vim-visual-multi)
+    * [tabular](#tabular)
+    * [bullets.vim](#bulletsvim)
+    * [vim-move](#vim-move)
+    * [auto-pairs](#auto-pairs)
+  * [Visual enhancement](#visual-enhancement)
+    * [vim-airline](#vim-airline)
+    * [vim-deus](#vim-deus)
+    * [vim-devicons](#vim-devicons)
+    * [vim-xtabline](#vim-xtabline)
+    * [rainbow](#rainbow)
+    * [vim-illuminate](#vim-illuminate)
+  * [Auto completion](#auto-completion)
+    * [coc.nvim](#cocnvim)
+    * [coc-snippets](#coc-snippets)
+    * [vim-snippets](#vim-snippets)
+  * [Golang T.B.A](#golang-tba)
+  * [Python T.B.A](#python-tba)
+  * [Others](#others)
+    * [coc-translator](#coc-translator)
+    * [figlet](#figlet)
+* [Some known issues](#some-known-issues)
 * [To-do](#to-do)
 
 <!-- /TOC -->
+
 ## Pre-requirements
 - [X] `nodejs` - For coc.nvim.
 - [X] `yarn` - For vim-instant-markdown.
 - [X] `instant-markdown-d ` - For vim-instant-markdown.
-
 
 ## spell check usage
 
@@ -38,21 +55,24 @@ Auto enable spell check for `markdown` files.
 >autocmd BufRead,BufNewFile *.md call SetSpell()
 
 
-## vim-instant-markdown
-
-## tabular
+## Plugins
 
 
-Simple usage: line up at `=`.
+### Markdown & Editor enhancement
 
-```text
-:Tabularize /=
-```
-`=` can be changed to any signs.
+Some snippets can be found at `./markdown-snippets.vim`. The following part show the usage of other markdown related plugins.
 
-More complex usage can be found at [tabular-doc](https://github.com/godlygeek/tabular/blob/master/doc/Tabular.txt).
+#### [vim-instant-markdown](https://github.com/instant-markdown/vim-instant-markdown)
 
-## vim-table-model
+- `<LEADER>b` : preview in a browser
+
+#### [vim-markdown-toc](https://github.com/mzlogin/vim-markdown-toc)
+
+- `GenTocGFM` : Generate table of contents in GFM link style under the cursor.
+
+`GenTocGFM` can be changed to `GenTocGitLab`.
+
+#### [vim-table-model](https://github.com/dhruvasagar/vim-table-mode)
 
 - `<LEADER>tm` : enable table model;
 - `<LEADER>tdd` : delete row;
@@ -65,13 +85,13 @@ More complex usage can be found at [tabular-doc](https://github.com/godlygeek/ta
 - `<LEADER>tt` : convert select part to table(only available in visual model)
 
 
-## [vim-surround](https://github.com/tpope/vim-surround)
+#### [vim-surround](https://github.com/tpope/vim-surround)
 
 - `ysiw'` : change `word` to `'word'`
 - `ds'` : change `'word'` to `word`
 - `cs"'` : change `"word"` to `'word'`
 
-## [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
+#### [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
 
 `<LEADER>` in my vimrc is `,`.
 - `u` : undo
@@ -84,66 +104,177 @@ More complex usage can be found at [tabular-doc](https://github.com/godlygeek/ta
 - `C-Down` : ad cursors down
 - `<LEADER>A` : select all words under cursor.
 
+#### [tabular](https://github.com/godlygeek/tabular)
 
-## [coc-translator](https://github.com/voldikss/coc-translator)
+Simple usage: line up at `=`.
 
-- `ts` : translate the words under cursor or in the selected region.
+```text
+:Tabularize /=
+```
+`=` can be changed to any signs.
 
-## other visual enhancement
+More complex usage can be found at [tabular-doc](https://github.com/godlygeek/tabular/blob/master/doc/Tabular.txt).
 
-- [vim-xtabline](https://github.com/mg979/vim-xtabline): pretty the tab line;
-- [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
-
-  need some pre-requirements
-    * [nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
-      ```shell
-      brew tap homebrew/cask-fonts
-      brew install --cask font-hack-nerd-font
-      ```
-      Set your terminal font to `Hack Nerd Font Mono` or `Hack Nerd Font`. The following figure show the comparison between proportional font and monospaced font.
-
-![comparison between proportional font and monospaced font](https://image.i-ll.cc//uPic/20220122/phEM1j.jpg)
-
-## [bullets.vim](https://github.com/dkarter/bullets.vim)
+#### [bullets.vim](https://github.com/dkarter/bullets.vim)
 
 - `<leader>x` : set the current checkbox as completion.
 
-## [vim-xtabline](https://github.com/mg979/vim-xtabline)
-
-- `to` : switch among the modes in the list ['tabs', 'buffers']
-- `\p` : show the path of current file
-
-
-## [vim-move](https://github.com/matze/vim-move)
+#### [vim-move](https://github.com/matze/vim-move)
 
 - `C-j` : move the current line down
 
+#### [auto-pairs](https://github.com/jiangmiao/auto-pairs)
 
-## [coc-snippets](https://github.com/neoclide/coc-snippets) T.B.A
+Auto pair for the following signs.
+>\`\`, {}, [], (), '', ""
+
+More complex usage please refer the [doc](https://github.com/jiangmiao/auto-pairs).
+
+
+### Visual enhancement
+
+#### [vim-airline](https://github.com/vim-airline/vim-airline)
+
+Just install it without any extra configuration. When the plugin is loaded correctly, the status line should looks like this.
+
+![vim-airline](https://image.i-ll.cc/uPic/20220122/NzrP33.gif)
+
+#### [vim-deus](https://github.com/ajmwagar/vim-deus)
+
+Need some configuration for pretty looking. Which can be found in `vimrc`.
+
+![vim-deus](https://image.i-ll.cc//uPic/20220122/tgY4Yx.jpg)
+
+#### [vim-devicons](https://github.com/ryanoasis/vim-devicons)
+
+Need some pre-requirements
+
+* [nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
+  ```shell
+  brew tap homebrew/cask-fonts
+  brew install --cask font-hack-nerd-font
+  ```
+Set your terminal font to `Hack Nerd Font Mono` or `Hack Nerd Font`. The following figure show the comparison between proportional font and monospaced font.
+
+![comparison between proportional font and monospaced font](https://image.i-ll.cc//uPic/20220122/phEM1j.jpg)
+
+#### [vim-xtabline](https://github.com/mg979/vim-xtabline)
+
+Pretty the tab line;
+
+![vim-xtabline](https://image.i-ll.cc//uPic/20220122/8QoT8A.png?imageMogr2/auto-orient/blur/1x0/quality/75|watermark/2/text/WmhhbyBDaGnigJhzIEJsb2c=/font/dGltZXMgbmV3IHJvbWFu/fontsize/240/fill/IzAwMDAwMA==/dissolve/75/gravity/SouthEast/dx/10/dy/10|imageslim)
+
+- `to` : switch among the modes in the list ['tabs', 'buffers']
+- `\p` : show the path of current file
+- `N<BS>` : go to N-th tab, `N` is a number.
+
+#### [rainbow](https://github.com/luochen1990/rainbow)
+
+Show different level of brackets in different color!
+
+![rainbow](https://image.i-ll.cc//uPic/20220122/YFLVjW.jpg)
+
+**Note** : This plugin will cause some confliction with *Nerdtree*. We should add the following configuration to disable rainbow for nerdtree.
+```vim
+let g:rainbow_conf = {
+\	'separately': {
+\		'nerdtree': 0,
+\	}
+\}
+```
+
+#### [vim-illuminate](https://github.com/RRethy/vim-illuminate)
+
+Highligh others words automatically under the current cursor.
+
+```vim
+" time in milliseconds
+let g:Illuminate_delay = 500
+```
+
+### Auto completion
+
+#### [coc.nvim](https://github.com/neoclide/coc.nvim)
+
+The base of `coc.*` extensions. Requires [nodejs](https://nodejs.org/en/download/) >=12.12.
+
+```bash
+curl -sL install-node.vercel.app/lts | bash
+```
+
+- `<TAB>` : trigger completion, select next and jump to next like VSCode
+- `<S-TAB>` : select previous and jump to previous like VSCode
+- `<CR>` : select the first item in the candidate list
+- `[g` : go to the previous diagnostic
+- `]g` : go the the next diagnostic
+- `gd` : go to the definition
+- `gD` : go to the definition in a separate tab
+- `dy` : go to type definition
+- `gi` : go to implementation
+- `gr` : go to reference
+- `gh` : show documentation in preview window
+- `<LEADER>rn` : rename the variable name
+- `<LEADER>a` : do code action of selected region
+
+#### [coc-snippets](https://github.com/neoclide/coc-snippets)
 
 - `<TAB>` : trigger completion, select next and jump to next like VSCode
 - `<S-TAB>` : select previous and jump to previous like VSCode.
 - `C-e` : trigger snippet expand in `insert` mode.
 - `C-s` : select the text under the visual placeholder of snippet in `visual` mode.
 - `C-s` : expand snippet or jump(expand has higher priority).
+- `<LEADER>x` : convert visual selected code to snippet.
+
+#### [vim-snippets](https://github.com/honza/vim-snippets)
+
+This repository contains snippets files for various programming languages. No extra configuration.
+
+### Golang T.B.A
+
+### Python T.B.A
+
+### Others
+
+#### [coc-translator](https://github.com/voldikss/coc-translator)
+
+- `ts` : translate the words under cursor or in the selected region.
+
+#### figlet
+
+**Installation**
+
+```bash
+brew install figlet
+```
+
+- `tx words` : insert the following lines to current buffer, `words` can be changed by yourself.
+
+```text
+                       _     
+__      _____  _ __ __| |___ 
+\ \ /\ / / _ \| '__/ _` / __|
+ \ V  V / (_) | | | (_| \__ \
+  \_/\_/ \___/|_|  \__,_|___/
+                             
+```
 
 
-## some known issues
+## Some known issues
 
 - [X] `bullets.vim` will cause selecting the first item in the candidate list via `<CR>` not work.
     >Using `<TAB>` instead of `<CR>`.
 
 ## To-do
 
-- [X] vim-table-model
-- [ ] coc-nvim
-- [ ] coc-snippets
-- [ ] auto-pairs
-- [X] spell check
+- [ ] windows/tabs management
+- [ ] md-img-paste.vim
+- [ ] pandoc with vim
+- [ ] vim with tex
 - [ ] fzf
-- [X] [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-- [X] [tabular](https://github.com/godlygeek/tabular)
-- [X] [vim-surround](https://github.com/tpope/vim-surround)
-- [X] [coc-translator](https://github.com/voldikss/coc-translator)
-- [X] [vim-xtabline](https://github.com/mg979/vim-xtabline)
+- [ ] file navigation
 
+--------
+- [ ] ranger
+- [ ] git related
+- [ ] vim-go
+- [ ] python

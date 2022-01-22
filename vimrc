@@ -235,24 +235,26 @@ endfunc
 " ===
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
-
-" theme
-Plug 'ajmwagar/vim-deus'
+" Pretty vim
+Plug 'vim-airline/vim-airline' " status line
+Plug 'ajmwagar/vim-deus' " color scheme
 " Other visual enhancement
 Plug 'luochen1990/rainbow'
-Plug 'mg979/vim-xtabline'
-Plug 'ryanoasis/vim-devicons'
+Plug 'RRethy/vim-illuminate' " General highlight
+Plug 'mg979/vim-xtabline' " tab line
+Plug 'ryanoasis/vim-devicons' " icons
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" snippets
-Plug 'honza/vim-snippets'
+
+" auto completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
+Plug 'honza/vim-snippets' " snippets
+
 " Git
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
@@ -268,8 +270,6 @@ Plug 'matze/vim-move'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '', type cs'` to change 'word' to `word`, type ds' to change 'word' to word
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-" General highlight
-Plug 'RRethy/vim-illuminate'
 call plug#end()
 
 " ===
@@ -327,23 +327,14 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-imap <C-e> <Plug>(coc-snippets-expand)
-vmap <C-s> <Plug>(coc-snippets-select)
-imap <C-s> <Plug>(coc-snippets-expand-jump)
-let g:snips_author = 'Zhao Chi'
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -367,8 +358,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 " Remap for do codeAction of selected region
@@ -377,6 +366,18 @@ function! s:cocActionsOpenFromSelected(type) abort
 endfunction
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+" ===
+" === coc-snippets
+" ===
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
+imap <C-e> <Plug>(coc-snippets-expand)
+vmap <C-s> <Plug>(coc-snippets-select)
+imap <C-s> <Plug>(coc-snippets-expand-jump)
+let g:snips_author = 'Zhao Chi'
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
 
 
 " ===
@@ -438,6 +439,11 @@ nnoremap <LEADER>gn :GitGutterNextHunk<CR>
 " === rainbow
 " ===
 let g:rainbow_active = 1
+let g:rainbow_conf = {
+\	'separately': {
+\		'nerdtree': 0,
+\	}
+\}
 " ===
 " === vim-xtabline
 " ===
