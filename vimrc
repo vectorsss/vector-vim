@@ -243,6 +243,9 @@ Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
 Plug 'ajmwagar/vim-deus'
 " Other visual enhancement
 Plug 'luochen1990/rainbow'
+Plug 'mg979/vim-xtabline'
+Plug 'ryanoasis/vim-devicons'
+
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -257,7 +260,7 @@ Plug 'cohama/agit.vim'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
-Plug 'dkarter/bullets.vim'
+Plug 'dkarter/bullets.vim', {'for': 'markdown'}
 
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
@@ -272,7 +275,6 @@ call plug#end()
 " ===
 " === ajmwagar/vim-deus
 " ===
-colors deus
 set t_Co=256
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -321,15 +323,22 @@ set shortmess+=c
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
+imap <C-e> <Plug>(coc-snippets-expand)
+vmap <C-s> <Plug>(coc-snippets-select)
+imap <C-s> <Plug>(coc-snippets-expand-jump)
+let g:snips_author = 'Zhao Chi'
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
@@ -342,6 +351,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -428,9 +438,21 @@ nnoremap <LEADER>gn :GitGutterNextHunk<CR>
 " === rainbow
 " ===
 let g:rainbow_active = 1
-" " ===
-" " === matze/vim-move
-" " ===
+" ===
+" === vim-xtabline
+" ===
+let g:xtabline_settings = {}
+let g:xtabline_settings.enable_mappings = 0
+let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
+let g:xtabline_settings.enable_persistance = 0
+let g:xtabline_settings.last_open_first = 1
+noremap to :XTabMode<CR>
+noremap \p :echo expand('%:p')<CR>
+" set theme to 'dracula'
+autocmd VimEnter * XTabTheme dracula
+" ===
+" === matze/vim-move
+" ===
 let g:move_key_modifier = 'C'
 
 " ===
