@@ -1,17 +1,25 @@
 <h1 align="center"> Vector's VIMRC memo </h1>
 
-- [X] vim-table-model
-- [ ] coc-nvim
-- [ ] coc-snippets
-- [ ] auto-pairs
-- [X] spell check
-- [ ] fzf
-- [X] [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-- [X] [tabular](https://github.com/godlygeek/tabular)
-- [X] [vim-surround](https://github.com/tpope/vim-surround)
-- [X] [coc-translator](https://github.com/voldikss/coc-translator)
-- [X] [vim-xtabline](https://github.com/mg979/vim-xtabline)
 
+<!-- TOC GFM -->
+
+* [Pre-requirements](#pre-requirements)
+* [spell check usage](#spell-check-usage)
+* [vim-instant-markdown](#vim-instant-markdown)
+* [tabular](#tabular)
+* [vim-table-model](#vim-table-model)
+* [vim-surround](#vim-surround)
+* [vim-visual-multi](#vim-visual-multi)
+* [coc-translator](#coc-translator)
+* [other visual enhancement](#other-visual-enhancement)
+* [bullets.vim](#bulletsvim)
+* [vim-xtabline](#vim-xtabline)
+* [vim-move](#vim-move)
+* [coc-snippets T.B.A](#coc-snippets-tba)
+* [some known issues](#some-known-issues)
+* [To-do](#to-do)
+
+<!-- /TOC -->
 ## Pre-requirements
 - [X] `nodejs` - For coc.nvim.
 - [X] `yarn` - For vim-instant-markdown.
@@ -124,3 +132,18 @@ More complex usage can be found at [tabular-doc](https://github.com/godlygeek/ta
 
 - [X] `bullets.vim` will cause selecting the first item in the candidate list via `<CR>` not work.
     >Using `<TAB>` instead of `<CR>`.
+
+## To-do
+
+- [X] vim-table-model
+- [ ] coc-nvim
+- [ ] coc-snippets
+- [ ] auto-pairs
+- [X] spell check
+- [ ] fzf
+- [X] [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
+- [X] [tabular](https://github.com/godlygeek/tabular)
+- [X] [vim-surround](https://github.com/tpope/vim-surround)
+- [X] [coc-translator](https://github.com/voldikss/coc-translator)
+- [X] [vim-xtabline](https://github.com/mg979/vim-xtabline)
+
