@@ -5,6 +5,10 @@
 - [ ] auto-pairs
 - [X] spell check
 - [ ] fzf
+- [X] [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
+- [X] [tabular](https://github.com/godlygeek/tabular)
+- [X] [vim-surround](https://github.com/tpope/vim-surround)
+- [X] [coc-translator](https://github.com/voldikss/coc-translator)
 
 ## Pre-requirements
 
@@ -13,7 +17,7 @@
 - [X] `instant-markdown-d ` - For vim-instant-markdown.
 
 
-## spell check usage 
+## spell check usage
 
 - `<LEADER>sc` : enable spell check
 - `C-x` : replace the bad word
@@ -27,7 +31,17 @@ Auto enable spell check for `markdown` files.
 
 ## vim-instant-markdown
 
+## tabular
 
+
+Simple usage: line up at `=`.
+
+```text
+:Tabularize /=
+```
+`=` can be changed to any signs.
+
+More complex usage can be found at [tabular-doc](https://github.com/godlygeek/tabular/blob/master/doc/Tabular.txt).
 
 ## vim-table-model
 
@@ -41,7 +55,32 @@ Auto enable spell check for `markdown` files.
 - `}|` : move to the right bottom corner of table.
 - `<LEADER>tt` : convert select part to table(only available in visual model)
 
+
+## [vim-surround](https://github.com/tpope/vim-surround)
+
+- `ysiw'` : change `word` to `'word'`
+- `ds'` : change `'word'` to `word`
+- `cs"'` : change `"word"` to `'word'`
+
+## [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
+
+`<LEADER>` in my vimrc is `,`.
+- `u` : undo
+- `C-r` : redo
+- `C-n` : select the next key
+- `q` : skip and go to next
+- `Q` : remove region under cursor
+- `<Tab>` : switch between `Cursor Model` and `Extend Model`
+- `C-Up` : add cursors up
+- `C-Down` : ad cursors down
+- `<LEADER>A` : select all words under cursor.
+
+
+## [coc-translator](https://github.com/voldikss/coc-translator)
+
+- `ts` : translate the words under cursor or in the selected region.
+
 ## some known issues
 
-- [ ] `bullets.vim` will cause selecting the first item in the candidate list via `<CR>` not work.
+- [X] `bullets.vim` will cause selecting the first item in the candidate list via `<CR>` not work.
     >Using `<TAB>` instead of `<CR>`.

@@ -263,6 +263,8 @@ Plug 'dkarter/bullets.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '', type cs'` to change 'word' to `word`, type ds' to change 'word' to word
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " General highlight
 Plug 'RRethy/vim-illuminate'
 call plug#end()
@@ -308,7 +310,8 @@ map <LEADER>tm :TableModeToggle<CR>
 let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-vimlsp',
-  \ 'coc-snippets']
+  \ 'coc-snippets',
+  \ 'coc-translator']
 
 set hidden
 set updatetime=100
@@ -438,3 +441,16 @@ let g:move_key_modifier = 'C'
 let g:vmt_cycle_list_item_markers = 0
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
+" ===
+" === coc-translator
+" ===
+nmap ts <Plug>(coc-translator-p)
+vmap ts <Plug>(coc-translator-pv)
+" ===
+" === vim-visual-multi
+" ===
+let g:VM_leader           = {'default': ',', 'visual': ',', 'buffer': ','}
+let g:VM_maps             = {}
+let g:VM_maps['Motion ,'] = ',,'
+let g:VM_maps["Undo"]     = 'u'
+let g:VM_maps["Redo"]     = '<C-r>'
