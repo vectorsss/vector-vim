@@ -6,6 +6,7 @@
 
 * [Pre-requirements](#pre-requirements)
 * [spell check usage](#spell-check-usage)
+* [fzf in terminal](#fzf-in-terminal)
 * [Plugins](#plugins)
   * [Markdown & Editor enhancement](#markdown--editor-enhancement)
     * [vim-instant-markdown](#vim-instant-markdown)
@@ -28,6 +29,9 @@
     * [coc.nvim](#cocnvim)
     * [coc-snippets](#coc-snippets)
     * [vim-snippets](#vim-snippets)
+  * [File navigation](#file-navigation)
+    * [fzf.vim](#fzfvim)
+    * [nerdtree](#nerdtree)
   * [Golang T.B.A](#golang-tba)
   * [Python T.B.A](#python-tba)
   * [Others](#others)
@@ -39,9 +43,13 @@
 <!-- /TOC -->
 
 ## Pre-requirements
-- [X] `nodejs` - For coc.nvim.
-- [X] `yarn` - For vim-instant-markdown.
-- [X] `instant-markdown-d ` - For vim-instant-markdown.
+
+1. `nodejs` - For coc.nvim.
+    >curl -sL install-node.vercel.app/lts | bash
+2. `yarn` - For vim-instant-markdown.
+    >npm install --global yarn
+3. `instant-markdown-d ` - For vim-instant-markdown.
+    >npm -g install instant-markdown-d
 
 ## spell check usage
 
@@ -53,6 +61,25 @@
 Auto enable spell check for `markdown` files.
 
 >autocmd BufRead,BufNewFile *.md call SetSpell()
+
+## fzf in terminal
+
+The following command will install `fzf` binary and key bindings for MacOS.
+
+```bash
+brew install fzf
+(brew --prefix)/opt/fzf/install
+```
+Here I just list some of my most commonly used usages.
+
+- `C-t` : open interactive fzf in the current directory. Then insert some keywords for searching, `C-p`, `C-n` for moving and `<CR>` for selecting.
+
+    ![fzf-C-T-example](https://image.i-ll.cc//uPic/20220123/kwOBDZ.png?imageMogr2/auto-orient/blur/1x0/quality/75|watermark/2/text/WmhhbyBDaGnigJhzIEJsb2c=/font/dGltZXMgbmV3IHJvbWFu/fontsize/240/fill/IzAwMDAwMA==/dissolve/75/gravity/SouthEast/dx/10/dy/10|imageslim)
+
+- `C-r` : open interactive fzf for history commands with the same selection logic as `C-t`.
+- **shell completion** : fzf use keyword `**` instead of `<TAB>` for shell completion.
+
+  ![fzf-shell-completion-example](https://image.i-ll.cc//uPic/20220123/gs5lbL.png?imageMogr2/auto-orient/blur/1x0/quality/75|watermark/2/text/WmhhbyBDaGnigJhzIEJsb2c=/font/dGltZXMgbmV3IHJvbWFu/fontsize/240/fill/IzAwMDAwMA==/dissolve/75/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 ## Plugins
@@ -229,6 +256,32 @@ curl -sL install-node.vercel.app/lts | bash
 
 This repository contains snippets files for various programming languages. No extra configuration.
 
+### File navigation
+
+#### [fzf.vim](https://github.com/junegunn/fzf.vim)
+
+The following shortcuts are working on **normal** mode.
+
+- `C-p` : Show the files in current directory. By the way, you can use `:File [path]` to show the files in `[path]`.
+- `<BS>` : Open the buffer list. (Because I set `<BS>` in **xtabline**, for someone don't want to set `<BS>` in **xtabline**, you can use `:Buffers` instead.
+- `C-f` : Searching text in files under the current directory via [ripgrep](https://github.com/BurntSushi/ripgrep).
+
+    ![ripgrep-search-example](https://image.i-ll.cc//uPic/20220123/260o2G.png?imageMogr2/auto-orient/blur/1x0/quality/75|watermark/2/text/WmhhbyBDaGnigJhzIEJsb2c=/font/dGltZXMgbmV3IHJvbWFu/fontsize/240/fill/IzAwMDAwMA==/dissolve/75/gravity/SouthEast/dx/10/dy/10|imageslim)
+
+- `<LEADER>;` : Which is the simplification for command `:History`. **Note: no \<CR\> after :History**. Three cases here, [`<CR>`, `:<CR>`, `/<CR>`].
+  - `<LEADER>;<CR>` : `:oldfiles` and open buffers.
+  - `<LEADER>;:<CR>` : Command history.
+  - `<LEADER>;/<CR>` : Searching history.
+
+#### [nerdtree](https://github.com/preservim/nerdtree)
+
+- `tt` : open the Nerdtree of current working directory.
+
+    ![nerdtree-example](https://image.i-ll.cc//uPic/20220124/nCQB4L.png?imageMogr2/auto-orient/blur/1x0/quality/75|watermark/2/text/WmhhbyBDaGnigJhzIEJsb2c=/font/dGltZXMgbmV3IHJvbWFu/fontsize/240/fill/IzAwMDAwMA==/dissolve/75/gravity/SouthEast/dx/10/dy/10|imageslim)
+
+- `o` : open the selected file in new tab.
+- `?` : show/close the nerdtree help documentation.
+
 ### Golang T.B.A
 
 ### Python T.B.A
@@ -270,8 +323,9 @@ __      _____  _ __ __| |___
 - [ ] md-img-paste.vim
 - [ ] pandoc with vim
 - [ ] vim with tex
-- [ ] fzf
 - [ ] file navigation
+  - [X] fzf
+  - [ ] nerdtree
 
 --------
 - [ ] ranger

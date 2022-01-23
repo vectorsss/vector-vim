@@ -362,7 +362,7 @@ endfunction
 nmap <leader>rn <Plug>(coc-rename)
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
+execute 'CocCommand actions.open ' . a:type
 endfunction
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -391,8 +391,8 @@ let g:Illuminate_delay = 500
 " ===
 map tt :NERDTreeToggle<CR>
 let NERDTreeMapOpenExpl = ""
-let NERDTreeMapUpdir = ""
-let NERDTreeMapUpdirKeepOpen = "l"
+let NERDTreeMapUpdir = "l"
+let NERDTreeMapUpdirKeepOpen = ""
 let NERDTreeMapOpenSplit = ""
 let NERDTreeOpenVSplit = ""
 let NERDTreeMapActivateNode = "i"
@@ -406,16 +406,16 @@ let NERDTreeMapChangeRoot = "y"
 " == NERDTree-git
 " ==
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
+  \ "Modified"  : "✹",
+  \ "Staged"    : "✚",
+  \ "Untracked" : "✭",
+  \ "Renamed"   : "➜",
+  \ "Unmerged"  : "═",
+  \ "Deleted"   : "✖",
+  \ "Dirty"     : "✗",
+  \ "Clean"     : "✔︎",
+  \ "Unknown"   : "?"
+  \ }
 
 " ==
 " == GitGutter
@@ -483,3 +483,9 @@ let g:VM_maps             = {}
 let g:VM_maps['Motion ,'] = ',,'
 let g:VM_maps["Undo"]     = 'u'
 let g:VM_maps["Redo"]     = '<C-r>'
+" ===
+" === fzf.vim
+" ===
+noremap <silent> <C-p> :Files<CR>
+noremap <silent> <C-f> :Rg<CR>
+noremap <LEADER>; :History
