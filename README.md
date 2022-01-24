@@ -1,5 +1,6 @@
 <h1 align="center"> Vector's VIMRC memo </h1>
 
+
 ## Table of contexts
 
 <!-- TOC GFM -->
@@ -9,7 +10,7 @@
 * [fzf in terminal](#fzf-in-terminal)
 * [Plugins](#plugins)
   * [Markdown & Editor enhancement](#markdown--editor-enhancement)
-    * [vim-instant-markdown](#vim-instant-markdown)
+    * [markdown-preview.nvim](#markdown-previewnvim)
     * [vim-markdown-toc](#vim-markdown-toc)
     * [vim-table-model](#vim-table-model)
     * [vim-surround](#vim-surround)
@@ -46,10 +47,6 @@
 
 1. `nodejs` - For coc.nvim.
     >curl -sL install-node.vercel.app/lts | bash
-2. `yarn` - For vim-instant-markdown.
-    >npm install --global yarn
-3. `instant-markdown-d ` - For vim-instant-markdown.
-    >npm -g install instant-markdown-d
 
 ## spell check usage
 
@@ -89,9 +86,27 @@ Here I just list some of my most commonly used usages.
 
 Some snippets can be found at `./markdown-snippets.vim`. The following part show the usage of other markdown related plugins.
 
-#### [vim-instant-markdown](https://github.com/instant-markdown/vim-instant-markdown)
+#### [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 
-- `<LEADER>b` : preview in a browser
+
+- `<LEADER>b` : preview in a browser.
+- You can add `toc` by one of the following flag.
+
+  ```text
+  ${toc}
+  [[toc]]
+  [toc]
+  [[_toc_]]
+  ```
+- More example can be found in [doc](https://github.com/iamcco/markdown-preview.nvim).
+
+Use [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) instead of ~~[vim-instant-markdown](https://github.com/instant-markdown/vim-instant-markdown)~~.
+
+I met some problems when I use [vim-instant-markdown](https://github.com/instant-markdown/vim-instant-markdown).
+
+1. Auto scroll not work on `MacOS` and `WSL2(Ubuntu 20.04)`.
+2. `<LEADER>b` on `WSL2` will cause a very weird problem -- everything in the current vim editor disappears inexplicably and when you move the cursor the contents will recover. Upgrading vim to 8.2 didn't make sense for this problem.
+3. Cross reference can not work. (can not go to section from table of contents)
 
 #### [vim-markdown-toc](https://github.com/mzlogin/vim-markdown-toc)
 

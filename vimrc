@@ -224,7 +224,7 @@ func! CompileRunGcc()
   elseif &filetype == 'html'
     exec "!firefox % &"
   elseif &filetype == 'markdown'
-    exec "InstantMarkdownPreview"
+    exec "MarkdownPreview"
   endif
 endfunc
 
@@ -259,7 +259,7 @@ Plug 'honza/vim-snippets' " snippets
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
 " Markdown
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim', {'for': 'markdown'}
@@ -283,19 +283,36 @@ set background=dark    " Setting dark mode
 colorscheme deus
 let g:deus_termcolors=256
 " ===
-" === vim-instant-markdown
+" === MarkdownPreview
 " ===
-"let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-"let g:instant_markdown_open_to_the_world = 1
-let g:instant_markdown_allow_unsafe_content = 1
-"let g:instant_markdown_allow_external_content = 0
-let g:instant_markdown_mathjax = 1
-let g:instant_markdown_mermaid = 1
-"let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
-let g:instant_markdown_autoscroll = 1
-"let g:instant_markdown_port = 8888
-"let g:instant_markdown_python = 1
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_command_for_global = 0
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_ip = ''
+let g:mkdp_browser = ''
+let g:mkdp_echo_preview_url = 0
+let g:mkdp_browserfunc = ''
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+let g:mkdp_markdown_css = ''
+let g:mkdp_highlight_css = ''
+let g:mkdp_theme = 'light'
+let g:mkdp_port = '12333'
+let g:mkdp_page_title = '「${name}」'
+let g:mkdp_filetypes = ['markdown']
 source ~/.vim/markdown-snippets.vim
 autocmd BufRead,BufNewFile *.md call SetSpell()
 
