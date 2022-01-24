@@ -252,7 +252,7 @@ Plug 'junegunn/fzf.vim'
 
 " auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', {'for': 'go' ,'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', {'for': 'go', 'tag': '*' }
 Plug 'honza/vim-snippets' " snippets
 
 " Git
