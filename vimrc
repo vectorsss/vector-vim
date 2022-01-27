@@ -22,9 +22,6 @@ endif
 " ===
 
 set nocompatible
-filetype on
-filetype indent on
-filetype plugin on
 filetype plugin indent on
 set mouse=a
 set encoding=utf-8
@@ -69,11 +66,11 @@ set backspace=indent,eol,start
 
 set foldmethod=indent
 set foldlevel=99
-
 " set the cursor shape for different model
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let g:tex_flavor="latex"
 
 " ===
 " === Status/command bar
@@ -263,7 +260,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim', {'for': 'markdown'}
-
+Plug 'ferrine/md-img-paste.vim', {'for': ['markdown', 'tex']}
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
@@ -469,11 +466,10 @@ let g:xtabline_settings.enable_mappings = 0
 let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
 let g:xtabline_settings.enable_persistance = 0
 let g:xtabline_settings.last_open_first = 1
+let g:xtabline_settings.theme = 'dracula'
 nmap <silent><expr> <BS> v:count ? "\<Plug>(XT-Select-Buffer)" : ":Buffers\r"
 noremap to :XTabMode<CR>
 noremap \p :echo expand('%:p')<CR>
-" set theme to 'dracula'
-autocmd VimEnter * XTabTheme dracula
 " ===
 " === matze/vim-move
 " ===
@@ -506,3 +502,9 @@ let g:VM_maps["Redo"]     = '<C-r>'
 noremap <silent> <C-p> :Files<CR>
 noremap <silent> <C-f> :Rg<CR>
 noremap <LEADER>; :History
+" ===
+" === md-img-paste.vim
+" ===
+autocmd FileType markdown let g:PasteImageFunction = 'g:MarkdownPasteImage'
+autocmd FileType tex let g:PasteImageFunction = 'g:LatexPasteImage'
+autocmd FileType markdown,tex nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
