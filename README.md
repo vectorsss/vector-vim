@@ -38,7 +38,7 @@
   * [Others](#others)
     * [coc-translator](#coc-translator)
     * [figlet](#figlet)
-* [Some known issues](#some-known-issues)
+* [Some issues you may meet](#some-issues-you-may-meet)
 * [To-do](#to-do)
 
 <!-- /TOC -->
@@ -104,8 +104,8 @@ Use [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) ins
 
 I met some problems when I use [vim-instant-markdown](https://github.com/instant-markdown/vim-instant-markdown).
 
-1. Auto scroll not work on `MacOS` and `WSL2(Ubuntu 20.04)`.
-2. `<LEADER>b` on `WSL2` will cause a very weird problem -- everything in the current vim editor disappears inexplicably and when you move the cursor the contents will recover. Upgrading vim to 8.2 didn't make sense for this problem.
+1. Auto scroll not work on `MacOS` and `WSL(Ubuntu 20.04)`.
+2. `<LEADER>b` on `WSL` will cause a very weird problem -- everything in the current vim editor disappears inexplicably and when you move the cursor the contents will recover. Upgrading vim to 8.2 didn't make sense for this problem.
 3. Cross reference can not work. (can not go to section from table of contents)
 
 #### [vim-markdown-toc](https://github.com/mzlogin/vim-markdown-toc)
@@ -327,11 +327,12 @@ __      _____  _ __ __| |___
 ```
 
 
-## Some known issues
+## Some issues you may meet
 
 - [X] `bullets.vim` will cause selecting the first item in the candidate list via `<CR>` not work.
     >Using `<TAB>` instead of `<CR>`.
-
+- [X] `cmd.exe` and `clip.exe` not work(i.e. can not access windows file system from WSL), which causes `<leader>b` not properly on WSL.
+    >wsl.exe --shutdown
 ## To-do
 
 - [ ] windows/tabs management
