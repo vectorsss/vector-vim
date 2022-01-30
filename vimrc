@@ -505,6 +505,9 @@ noremap <LEADER>; :History
 " ===
 " === md-img-paste.vim
 " ===
-autocmd FileType markdown let g:PasteImageFunction = 'g:MarkdownPasteImage'
+autocmd FileType tex let g:mdip_imgdir = 'figures'
+autocmd FileType tex let g:mdip_imgdir_intext = 'figures'
+autocmd FileType tex let g:mdip_imgname = 'figure'
 autocmd FileType tex let g:PasteImageFunction = 'g:LatexPasteImage'
+autocmd FileType markdown let g:PasteImageFunction = 'g:MarkdownPasteImage'
 autocmd FileType markdown,tex nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
