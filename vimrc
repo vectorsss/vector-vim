@@ -261,6 +261,9 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'm
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim', {'for': 'markdown'}
 Plug 'ferrine/md-img-paste.vim', {'for': ['markdown', 'tex']}
+
+" latex
+Plug 'lervag/vimtex'
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'matze/vim-move'
@@ -511,3 +514,14 @@ autocmd FileType tex let g:mdip_imgname = 'figure'
 autocmd FileType tex let g:PasteImageFunction = 'g:LatexPasteImage'
 autocmd FileType markdown let g:PasteImageFunction = 'g:MarkdownPasteImage'
 autocmd FileType markdown,tex nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" ===
+" === VimTex
+" ===
+let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_view_method = 'zathura'
+let maplocalleader = ","
+let g:vimtex_view_automatic = 1
+let g:tex_flavor = 'latex'
+if empty(v:servername) && exists('*remote_startserver')
+  call remote_startserver('VIM')
+endif

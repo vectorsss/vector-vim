@@ -33,6 +33,7 @@
   * [File navigation](#file-navigation)
     * [fzf.vim](#fzfvim)
     * [nerdtree](#nerdtree)
+  * [vimtex](#vimtex)
   * [Golang T.B.A](#golang-tba)
   * [Python T.B.A](#python-tba)
   * [Others](#others)
@@ -297,6 +298,10 @@ The following shortcuts are working on **normal** mode.
 - `o` : open the selected file in new tab.
 - `?` : show/close the nerdtree help documentation.
 
+### [vimtex](https://github.com/lervag/vimtex)
+
+- `localLeader` : `,`
+
 ### Golang T.B.A
 
 ### Python T.B.A
@@ -333,12 +338,14 @@ __      _____  _ __ __| |___
     >Using `<TAB>` instead of `<CR>`.
 - [X] `cmd.exe` and `clip.exe` not work(i.e. can not access windows file system from WSL), which causes `<leader>b` not properly on WSL.
     >wsl.exe --shutdown
+
+
 ## To-do
 
 - [ ] windows/tabs management
 - [ ] md-img-paste.vim
 - [ ] pandoc with vim
-- [ ] vim with tex
+- [ ] vim with tex (brew install --build-from-source --formula /path/to/your/formula) **need vim enable client-server**
 - [ ] file navigation
   - [X] fzf
   - [ ] nerdtree
