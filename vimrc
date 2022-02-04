@@ -189,8 +189,8 @@ function SetSpell()
   noremap <C-x> ea<C-x>s
   inoremap <C-x> <Esc>ea<C-x>s
   hi SpellBad cterm=underline ctermfg=red
-  noremap <LEADER>p [s
-  noremap <LEADER>n ]s
+  noremap <LEADER>- [s
+  noremap <LEADER>= ]s
 endfunction
 
 
@@ -528,6 +528,8 @@ let g:tex_flavor = 'latex'
 if empty(v:servername) && exists('*remote_startserver')
   call remote_startserver('VIM')
 endif
+nmap <LEADER>c :set conceallevel=1<CR>
+let g:tex_conceal='abdmg'
 " ===
 " === vim-go
 " ===

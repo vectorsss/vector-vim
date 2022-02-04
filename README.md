@@ -55,8 +55,8 @@
 
 - `<LEADER>sc` : enable spell check
 - `C-x` : replace the bad word
-- `<LEADER>p` : jump to the previous bad word
-- `<LEADER>n` : jump to the next bad word
+- `<LEADER>-` : jump to the previous bad word
+- `<LEADER>=` : jump to the next bad word
 
 Auto enable spell check for `markdown` files.
 
@@ -309,6 +309,9 @@ The following shortcuts are working on **normal** mode.
 - `<localLeader>lc` : clean the auxiliary files
 - `<localLeader>le` : toggle the QuickFix menu
 - `<localLeader>lt` : show table of contents, also show labels, can be used to jump to sections, labels, references and TODOs.
+- `dse` : delete surrounding environment
+- `cse` : change surrounding environment
+- `tse` : toggle surrounding environment(toggle between `environment*` and `environment`)
 
 Note: If you use VIM and want to use `vimtex-synctex-inverse-search`, you should be aware that one may need to ensure that the server is really running. For OSX user, you should make sure you already install `XQuartz` and it is running and make sure your vim is support `clientserver` and `X11`.
 
