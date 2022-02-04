@@ -34,12 +34,14 @@
     * [fzf.vim](#fzfvim)
     * [nerdtree](#nerdtree)
   * [vimtex](#vimtex)
+  * [vista.vim -- TagList](#vistavim----taglist)
   * [Golang T.B.A](#golang-tba)
   * [Python T.B.A](#python-tba)
   * [Others](#others)
     * [coc-translator](#coc-translator)
     * [figlet](#figlet)
 * [Some issues you may meet](#some-issues-you-may-meet)
+  * [Build VIM from source via brew](#build-vim-from-source-via-brew)
 * [To-do](#to-do)
 
 <!-- /TOC -->
@@ -301,6 +303,15 @@ The following shortcuts are working on **normal** mode.
 ### [vimtex](https://github.com/lervag/vimtex)
 
 - `localLeader` : `,`
+- `<localLeader>ll` : compile the current latex file
+- `<localLeader>lv` : view the output pdf
+- `<localLeader>lc` : clean compiled files
+
+Note: If you use VIM and want to use `vimtex-synctex-inverse-search`, you should be aware that one may need to ensure that the server is really running. For OSX user, you should make sure you already install `XQuartz` and it is running and make sure your vim is support `clientserver` and `X11`.
+
+### [vista.vim](https://github.com/liuchengxu/vista.vim) -- TagList
+
+- `T` : toggle vista view window
 
 ### Golang T.B.A
 
@@ -338,6 +349,39 @@ __      _____  _ __ __| |___
     >Using `<TAB>` instead of `<CR>`.
 - [X] `cmd.exe` and `clip.exe` not work(i.e. can not access windows file system from WSL), which causes `<leader>b` not properly on WSL.
     >wsl.exe --shutdown
+- [X] can not use `vimtex-synctex-inverse-search` with `zathura` and `vimTex`.
+    >brew  install xquartz --cask # and build VIM from source via brew
+
+### Build VIM from source via brew
+
+```bash
+brew edit vim
+```
+Change brew formula of vim like this.
+
+```bash
+system "./configure", "--prefix=#{HOMEBREW_PREFIX}",
+                      "--mandir=#{man}",
+                      "--enable-gui=gtk2",
+                      "--with-features=huge",
+                      "--with-client-server",
+                      "--enable-multibyte",
+                      "--with-tlib=ncurses",
+                      "--with-compiledby=Homebrew",
+                      "--enable-cscope",
+                      "--enable-terminal",
+                      "--enable-perlinterp",
+                      "--enable-rubyinterp",
+                      "--enable-python3interp",
+                      #"--without-x",
+                      "--enable-luainterp",
+                      "--with-lua-prefix=#{Formula["lua"].opt_prefix}"
+```
+
+
+```base
+brew install --build-from-source --formula /path/to/your/brew/formula/of/vim
+```
 
 
 ## To-do
