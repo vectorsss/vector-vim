@@ -303,9 +303,12 @@ The following shortcuts are working on **normal** mode.
 ### [vimtex](https://github.com/lervag/vimtex)
 
 - `localLeader` : `,`
-- `<localLeader>ll` : compile the current latex file
-- `<localLeader>lv` : view the output pdf
-- `<localLeader>lc` : clean compiled files
+- `<localLeader>ll` : start or stop compiling the document
+- `<localLeader>lk` : stop the compilation process
+- `<localLeader>lv` : forward search, view the compiled PDF
+- `<localLeader>lc` : clean the auxiliary files
+- `<localLeader>le` : toggle the QuickFix menu
+- `<localLeader>lt` : show table of contents, also show labels, can be used to jump to sections, labels, references and TODOs.
 
 Note: If you use VIM and want to use `vimtex-synctex-inverse-search`, you should be aware that one may need to ensure that the server is really running. For OSX user, you should make sure you already install `XQuartz` and it is running and make sure your vim is support `clientserver` and `X11`.
 
