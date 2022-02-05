@@ -312,6 +312,9 @@ The following shortcuts are working on **normal** mode.
 - `dse` : delete surrounding environment
 - `cse` : change surrounding environment
 - `tse` : toggle surrounding environment(toggle between `environment*` and `environment`)
+- `<LEADER>c` : set conceallevel=1 -- better view for latex documents
+
+    ![concealment-latex-code-example](https://image.i-ll.cc//uPic/20220205/eF21Gq.gif)
 
 Note: If you use VIM and want to use `vimtex-synctex-inverse-search`, you should be aware that one may need to ensure that the server is really running. For OSX user, you should make sure you already install `XQuartz` and it is running and make sure your vim is support `clientserver` and `X11`.
 
