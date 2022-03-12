@@ -70,7 +70,6 @@ set foldlevel=99
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-let g:tex_flavor="latex"
 
 " ===
 " === Status/command bar
@@ -196,6 +195,9 @@ endfunction
 
 " Copy to system clipboard(register *)
 vnoremap Y "*y
+" copy to the end of the current line
+nmap Y y$
+
 
 " Call figlet
 map tx :r !figlet
@@ -212,7 +214,7 @@ func! CompileRunGcc()
     exec "!time ./%<"
   elseif &filetype == 'java'
     exec "!javac %"
-    exec "!time java %<"
+e   exec "!time java %<"
   elseif &filetype == 'sh'
     :!time bash %
   elseif &filetype == 'python'
@@ -233,48 +235,47 @@ endfunc
 call plug#begin('~/.vim/plugged')
 
 " Pretty vim
-Plug 'vim-airline/vim-airline' " status line
-Plug 'ajmwagar/vim-deus' " color scheme
-" Other visual enhancement
-Plug 'luochen1990/rainbow'
-Plug 'RRethy/vim-illuminate' " General highlight
-Plug 'mg979/vim-xtabline' " tab line
-Plug 'ryanoasis/vim-devicons' " icons
+ Plug 'vim-airline/vim-airline' " status line
+ Plug 'ajmwagar/vim-deus' " color scheme
+ " Other visual enhancement
+ Plug 'luochen1990/rainbow'
+ Plug 'RRethy/vim-illuminate' " General highlight
+ Plug 'mg979/vim-xtabline' " tab line
+ Plug 'ryanoasis/vim-devicons' " icons
 
-" File navigation
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+ " File navigation
+ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+ Plug 'Xuyuanp/nerdtree-git-plugin'
+ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+ Plug 'junegunn/fzf.vim'
 
-" auto completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', {'for': 'go', 'tag': '*' }
-Plug 'honza/vim-snippets' " snippets
+ " auto completion
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'fatih/vim-go', {'for': 'go', 'tag': '*' }
+ Plug 'honza/vim-snippets' " snippets
 
-" Git
-Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'
-" Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
-Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
-Plug 'dkarter/bullets.vim', {'for': 'markdown'}
-Plug 'ferrine/md-img-paste.vim', {'for': ['markdown', 'tex']}
+ " Git
+ Plug 'airblade/vim-gitgutter'
+ Plug 'cohama/agit.vim'
+ " Markdown
+ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
+ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
+ Plug 'dkarter/bullets.vim', {'for': 'markdown'}
+ Plug 'ferrine/md-img-paste.vim', {'for': ['markdown', 'tex']}
 
-" latex
-Plug 'lervag/vimtex'
-" Editor Enhancement
-Plug 'jiangmiao/auto-pairs'
-Plug 'matze/vim-move'
-Plug 'godlygeek/tabular'
-Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '', type cs'` to change 'word' to `word`, type ds' to change 'word' to word
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
-" taglist
-Plug 'liuchengxu/vista.vim'
+ " latex
+ Plug 'lervag/vimtex'
+ " Editor Enhancement
+ Plug 'jiangmiao/auto-pairs'
+ Plug 'matze/vim-move'
+ Plug 'godlygeek/tabular'
+ Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '', type cs'` to change 'word' to `word`, type ds' to change 'word' to word
+ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+ Plug 'andymass/vim-matchup'
+ " taglist
+ Plug 'liuchengxu/vista.vim'
 call plug#end()
-
 " ===
 " === ajmwagar/vim-deus
 " ===
@@ -526,6 +527,9 @@ let g:vimtex_view_method = 'zathura'
 let maplocalleader = ","
 let g:vimtex_view_automatic = 1
 let g:tex_flavor = 'latex'
+let g:vimtex_fold_manual = 1
+let g:vimtex_quickfix_mode=0
+let g:vimtex_matchparen_enabled = 0
 if empty(v:servername) && exists('*remote_startserver')
   call remote_startserver('VIM')
 endif
@@ -533,8 +537,10 @@ nmap <LEADER>c :set conceallevel=1<CR>
 let g:tex_conceal='abdmg'
 let g:vimtex_compiler_latexmk_engines = {
     \ '_'                : '-pdf',
+    \ 'pdfdvi'           : '-pdfdvi',
+    \ 'pdfps'            : '-pdfps',
     \ 'pdflatex'         : '-pdf',
-    \ 'dvipdfex'         : '-pdfdvi',
+    \ 'luatex'           : '-lualatex',
     \ 'lualatex'         : '-lualatex',
     \ 'xelatex'          : '-xelatex',
     \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
