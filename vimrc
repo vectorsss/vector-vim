@@ -22,7 +22,9 @@ endif
 " ===
 
 set nocompatible
-filetype plugin indent on
+filetype on
+filetype plugin on
+filetype indent on
 set mouse=a
 set encoding=utf-8
 " clearing uses the current background color
@@ -214,7 +216,7 @@ func! CompileRunGcc()
     exec "!time ./%<"
   elseif &filetype == 'java'
     exec "!javac %"
-e   exec "!time java %<"
+    exec "!time java %<"
   elseif &filetype == 'sh'
     :!time bash %
   elseif &filetype == 'python'
@@ -237,6 +239,7 @@ call plug#begin('~/.vim/plugged')
 " Pretty vim
  Plug 'vim-airline/vim-airline' " status line
  Plug 'ajmwagar/vim-deus' " color scheme
+ Plug 'theniceboy/nvim-deus' " color scheme
  " Other visual enhancement
  Plug 'luochen1990/rainbow'
  Plug 'RRethy/vim-illuminate' " General highlight
@@ -275,52 +278,20 @@ call plug#begin('~/.vim/plugged')
  Plug 'andymass/vim-matchup'
  " taglist
  Plug 'liuchengxu/vista.vim'
+ " vim-calc
+ Plug 'theniceboy/vim-calc'
 call plug#end()
 " ===
 " === ajmwagar/vim-deus
 " ===
-set t_Co=256
-set termguicolors
+if (has("termguicolors"))
+  set termguicolors " enable true colors support
+endif
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark    " Setting dark mode
-colorscheme deus
-let g:deus_termcolors=256
-" ===
-" === MarkdownPreview
-" ===
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 0
-let g:mkdp_command_for_global = 0
-let g:mkdp_open_to_the_world = 1
-let g:mkdp_open_ip = ''
-let g:mkdp_browser = ''
-let g:mkdp_echo_preview_url = 0
-let g:mkdp_browserfunc = ''
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 0
-    \ }
-let g:mkdp_markdown_css = ''
-let g:mkdp_highlight_css = ''
-let g:mkdp_theme = 'light'
-let g:mkdp_port = '12333'
-let g:mkdp_page_title = '「${name}」'
-let g:mkdp_filetypes = ['markdown']
-source ~/.vim/markdown-snippets.vim
-autocmd BufRead,BufNewFile *.md call SetSpell()
-
-
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+silent! colorscheme onedark
 " ===
 " === vim-table-mode
 " ===
@@ -348,7 +319,7 @@ inoremap <silent><expr> <TAB>
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -399,7 +370,6 @@ imap <C-s> <Plug>(coc-snippets-expand-jump)
 let g:snips_author = 'Zhao Chi'
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
-
 
 
 " ===
@@ -484,14 +454,6 @@ noremap \p :echo expand('%:p')<CR>
 let g:move_key_modifier = 'C'
 
 " ===
-" === vim-markdown-toc
-" ===
-"let g:vmt_auto_update_on_save = 0
-"let g:vmt_dont_insert_fence = 1
-let g:vmt_cycle_list_item_markers = 0
-let g:vmt_fence_text = 'TOC'
-let g:vmt_fence_closing_text = '/TOC'
-" ===
 " === coc-translator
 " ===
 nmap ts <Plug>(coc-translator-p)
@@ -519,34 +481,6 @@ autocmd FileType tex let g:mdip_imgname = 'figure'
 autocmd FileType tex let g:PasteImageFunction = 'g:LatexPasteImage'
 autocmd FileType markdown let g:PasteImageFunction = 'g:MarkdownPasteImage'
 autocmd FileType markdown,tex nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-" ===
-" === VimTex
-" ===
-let g:vimtex_view_general_viewer = 'skim'
-let g:vimtex_view_method = 'skim'
-let maplocalleader = ","
-let g:vimtex_view_automatic = 1
-let g:tex_flavor = 'latex'
-let g:vimtex_fold_manual = 1
-let g:vimtex_quickfix_mode=0
-let g:vimtex_matchparen_enabled = 0
-if empty(v:servername) && exists('*remote_startserver')
-  call remote_startserver('VIM')
-endif
-nmap <LEADER>c :set conceallevel=1<CR>
-let g:tex_conceal='abdmg'
-let g:vimtex_compiler_latexmk_engines = {
-    \ '_'                : '-pdf',
-    \ 'pdfdvi'           : '-pdfdvi',
-    \ 'pdfps'            : '-pdfps',
-    \ 'pdflatex'         : '-pdf',
-    \ 'luatex'           : '-lualatex',
-    \ 'lualatex'         : '-lualatex',
-    \ 'xelatex'          : '-xelatex',
-    \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
-    \ 'context (luatex)' : '-pdf -pdflatex=context',
-    \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
-    \}
 " ===
 " === vim-go
 " ===
@@ -591,3 +525,7 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 let g:scrollstatus_size = 15
+" ===
+" === vim-calc
+" ===
+nnoremap <LEADER>a :call Calc()<CR>
