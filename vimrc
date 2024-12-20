@@ -280,6 +280,8 @@ call plug#begin('~/.vim/plugged')
  Plug 'liuchengxu/vista.vim'
  " vim-calc
  Plug 'theniceboy/vim-calc'
+ " github/copilot
+ Plug 'github/copilot.vim'
 call plug#end()
 " ===
 " === ajmwagar/vim-deus
@@ -529,3 +531,64 @@ let g:scrollstatus_size = 15
 " === vim-calc
 " ===
 nnoremap <LEADER>a :call Calc()<CR>
+
+"
+"
+" setting for VimTex
+let g:vimtex_view_general_viewer = 'skim'
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_skim_sync = 1
+let g:vimtex_view_skim_reading_bar = 1
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:vimtex_view_automatic = 1
+let g:vimtex_fold_manual = 1
+let g:vimtex_quickfix_mode=0
+let g:vimtex_matchparen_enabled = 0
+if empty(v:servername) && exists('*remote_startserver')
+  call remote_startserver('VIM')
+endif
+nmap <LEADER>c :set conceallevel=1<CR>
+let maplocalleader = ","
+let g:tex_conceal='abdmg'
+let g:vimtex_compiler_latexmk_engines = {
+    \ '_'                : '-pdf',
+    \ 'pdfdvi'           : '-pdfdvi',
+    \ 'pdfps'            : '-pdfps',
+    \ 'pdflatex'         : '-pdf',
+    \ 'luatex'           : '-lualatex',
+    \ 'lualatex'         : '-lualatex',
+    \ 'xelatex'          : '-xelatex',
+    \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+    \ 'context (luatex)' : '-pdf -pdflatex=context',
+    \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+    \}
+" Set the default engine for vimtex
+let g:vimtex_compiler_method = 'latexmk'
+let g:vimtex_compiler_latexmk = {
+    \ 'aux_dir' : 'build',
+    \ 'out_dir' : 'build',
+    \ 'executable' : 'latexmk',
+    \ 'options' : [
+    \   '-interaction=nonstopmode',
+    \   '-synctex=1',
+    \   '-output-directory=build',
+    \   '-pdf',
+    \   '-pdflatex',
+    \   '-bibtex',
+    \   '-shell-escape',
+    \   '-f',
+    \ ],
+    \}
+" autocmd User VimtexEventCompileSuccess call system('cp build/*.pdf .')
+function! s:TexFocusVim() abort
+  " Replace `TERMINAL` with the name of your terminal application
+  " Example: execute "!open -a iTerm2"  
+  " Example: execute "!open -a Alacritty"
+  silent execute "!open -a iTerm"
+  redraw!
+endfunction
+
+augroup vimtex_event_focus
+  au!
+  au User VimtexEventViewReverse call s:TexFocusVim()
+augroup END
